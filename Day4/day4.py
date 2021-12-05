@@ -1,7 +1,7 @@
 import numpy as np
 from scipy import stats
 
-fname = 'Day4/inp_test.txt'
+fname = 'Day4/inp.txt'
 
 f = open(fname,'r')
 header = np.array(f.readline().split(','),dtype='int')
@@ -9,16 +9,9 @@ f.close()
 
 input_array = np.genfromtxt(fname, dtype=int, skip_header=1)
 
-input_boards = np.zeros(((input_array.shape[0])//5,5,5))
-i = 0
-j = 0
-for row in input_array:
-    if j==5:
-        i+=1
-        j=0
-    input_boards[i,j,:] = row
-    j+=1
-input_boards = np.array(input_boards, dtype=int)
+input_boards = np.zeros(((input_array.shape[0])//5,5,5),dtype=int)
+for i in range((input_array.shape[0])//5):
+    input_boards[i,:,:] = input_array[i*5:i*5+5,:]
 
 called = np.zeros_like(input_boards)
 part_1 = True
